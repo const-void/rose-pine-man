@@ -1,7 +1,8 @@
 # rose-pine-man
 rose-pine color theme for `man` page viewing.
 
-[[/doc/rose-pine-man.png]]
+[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png|alt=rose-pine]]
+
 
 # Key features
 * Rose-pine colors are available beyond man pages
@@ -21,7 +22,7 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 $ . ~/.zshrc
 $ man zsh
 ```
-[[/doc/rose-pine-man.png]]
+[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png|alt=rose-pine]]
 
 Want to try other `rose-pine` themes or a `custom` one? We got you.
 
@@ -32,7 +33,8 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-moon
 ```
 
-[[/doc/rose-pine-moon.png]]
+[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-moon-man.png|alt=rose-pine-moon]]
+
 
 ## rose-pine-dawn
 ```zsh
@@ -41,7 +43,7 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-dawn
 ```
 
-[[/doc/rose-pine-dawn.png]]
+[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-dawn-man.png|alt=rose-pine-dawn]]
 
 ## customized theme
 ```zsh
@@ -61,13 +63,13 @@ Please see the tips+tricks section for cutomization hints!
 To try a different theme on the fly:
 ```zsh
 $ colorize_man rose-pine
-$ man ls
+$ man zsh
 $ colorize_man rose-pine-moon
-$ man ls
+$ man zsh
 $ colorize_man rose-pine-dawn
-$ man ls
+$ man zsh
 $ colorize_man custom
-$ man ls
+$ man zsh
 ```
 
 # Terminal notes
@@ -119,7 +121,7 @@ Theme colors are simply ANSI RGB values separated by ";" stored in the following
 To change colors, simply set the above to ANSI RGB, where a byte is an integer 0-255.
 ```zsh
 $ MAN_THEME_<setting>="<red byte>;<green byte>;<blue byte>"
-$ man ls
+$ man zsh
 ```
 
 ## Try out a completely new color
@@ -140,13 +142,13 @@ $ term16m_hex_to_ansi_rgb '#ff80ed'
 Then set, say, text, to the color you like...`MAN_THEME_TXT`is super dramatic, so let's try that!
 ```zsh
 $ MAN_THEME_TXT="255;128;237"
-$ man ls
+$ man zsh
 ```
 
 If things go crazy, reset your theme to one of the defaults
 ```zsh
 $ colorize_man rose-pine
-$ man ls
+$ man zsh
 ```
 
 ## Persisting customizations.
