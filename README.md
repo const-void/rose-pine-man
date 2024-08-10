@@ -1,2 +1,321 @@
 # rose-pine-man
-Rose Pine colors for MAN viewing
+rose-pine colro theme for `man` page viewing.
+
+# Key features
+* Rose-pine colors are available beyond man pages
+* Customizable + tweakable
+* Functions to help us learn about truecolor terminal colors
+
+# Quick Installation
+Clone + add to `.zshrc`
+```zsh
+$ mkdir -p ~/.config/zsh/
+$ cd ~/.config/zsh
+$ git clone https://github.com/const-void/rose-pine-man.git
+$ vi ~/.zshrc
+...
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+...
+$ . ~/.zshrc
+$ man ls
+```
+
+
+
+Want to try other `rose-pine` themes or a `custom` one? We got you.
+
+## rose-pine-moon
+```zsh
+# ~/.zshrc
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+colorize_man rose-pine-moon
+```
+
+## rose-pine-dawn
+```zsh
+# ~/.zshrc
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+colorize_man rose-pine-dawn
+```
+
+## customized theme
+```zsh
+# ~/.zshrc
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+colorize_man custom
+```
+
+Please see the tips+tricks section for cutomization hints!
+
+### Try out different themes on the fly!
+To try a different theme on the fly:
+```zsh
+$ colorize_man rose-pine
+$ man ls
+$ colorize_man rose-pine-moon
+$ man ls
+$ colorize_man rose-pine-dawn
+$ man ls
+$ colorize_man custom
+$ man ls
+```
+
+# Terminal notes
+**Assumptions:**
+* Terminal is truecolor ready...there are NO checks...use your eyes! (for now)
+* Tested with `zsh` on OSX w/alacritty
+* ANSI control character separator is `;`
+* ANSI escape control character is `\033`
+
+
+**Term notes:**
+* OSX `Terminal.app` does not support true-color...at all.  Avoid for now.
+
+# Tips and tricks
+Some handy helper functions are included, prefixed with `term16m` to indicate they require truecolor suport.  
+
+To use, run functions as commands from an interactive terminal, and explore color theming! 
+
+Color theming takes some trial and error.
+
+## Testing 
+When tweaking colors, it can be helpful to quickly test. 
+
+Check out colors used by current color settings / theme...
+```zsh
+$ term16m_man_color_test
+```
+
+See all the themes in one go...handy when customizing!  Note, this will reset your theme to the default.
+```zsh
+$ term16m_man_theme_color_test
+```
+
+## Trying out new colors
+Want to try different colors? No problem. `rose-pine.zsh` is intended to be modified by you! You do you. 
+
+Theme colors are simply ANSI RGB values separated by ";" stored in the following environment variables:
+
+| Variable              | Color Value                          |
+| --------------------- | ------------------------------------ |
+| `MAN_THEME_BG`        | Default background color (base)      |
+| `MAN_THEME_TXT`       | Default foreground color             |
+| `MAN_THEME_BG2`       | Secondary background color  (base+)  |
+| `MAN_THEME_UNDERLINE` | Color that replaces underline        |
+| `MAN_THEME_BOLD`      | Color that replaces bold             |
+| `MAN_THEME_BLINK`     | Color that replaces blink            |
+| `MAN_THEME_REVERSE`   | Color that replaces reverse          |
+
+To change colors, simply set the above to ANSI RGB, where a byte is an integer 0-255.
+```zsh
+$ MAN_THEME_<setting>="<red byte>;<green byte>;<blue byte>"
+$ man ls
+```
+
+## Try out a completely new color
+First, to get a feel for what an ANSI RGB value looks like:
+```zsh
+$ term16m_rgb_to_ansi_rgb 255 128 237
+255;128;237
+```
+
+Simple enough, right? 
+
+We know that finding RGB out in the wild is tough! So we have a helper function to convert hex to r;g;b:
+```zsh
+$ term16m_hex_to_ansi_rgb '#ff80ed'
+255;128;237
+```
+
+Then set, say, text, to the color you like...`MAN_THEME_TXT`is super dramatic, so let's try that!
+```zsh
+$ MAN_THEME_TXT="255;128;237"
+$ man ls
+```
+
+If things go crazy, reset your theme to one of the defaults
+```zsh
+$ colorize_man rose-pine
+$ man ls
+```
+
+## Persisting customizations.
+Any customization / exploration we have done is temporary. 
+
+### Lazy way
+One way to persist custom themese is to simply override settings in your .zshrc:
+```zsh
+$ vi ~/.zshrc
+...
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+MAN_THEME_TXT="255;128;237"
+...
+```
+
+While the above works and is quick, we lose the ability to try out themes, and in some cases...could be problematic.
+
+### Themeable way
+To make it long term, let's copy `rose-pine-man.zsh` to somewhere else, so we can make changes to that secondary spot, without having our updates overwritten by updates to the `rose-pine-man` github repository.  
+
+Customizing login shell scripts is a time honored tradition!  So let's roll up our sleeves and get to it.
+
+## Make and use local copy
+```zsh
+$ cp ~/.config/zsh/rose-pine-man/rose-pine-man.zsh ~/.config/zsh/custom-man.zsh
+$ vi ~/.zshrc
+...
+# source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+source ~/.config/zsh/custom-man.zsh
+colorize_man custom
+...
+$ . ~/.zshrc
+```
+
+If we ever need to revert back, comment the line containing `custom-man.zsh` and uncomment `rose-pine-man.zsh`.
+
+
+## Applying custom colors
+Places intended for us to customize have been identified by a CUSTOMIZE-FOR-YOU token.  For custom colors, there are two steps:
+1. Add your custom color
+2. Apply your custom color to the custom theme
+
+### Add custom color
+The first step is to add custom colors..look for the second CUSTOMIZE-FOR-YOU token, and add your own colors!
+```zsh
+$ vi ~/.config/zsh/custom-man.zsh
+...
+##
+# CUSTOMIZE-FOR-YOU
+# suggest prefixing with my_<color name> but...you do you!
+my_hot_pink="255;128;237"
+my_color_name_1="<r>;<g>;<b>"
+my_color_name_2="<r>;<g>;<b>"
+my_color_name_3="<r>;<g>;<b>"
+...
+```
+
+### Apply custom color
+Now let's add our new custom colors to the custom theme.  Look for the first CUSTOMIZE-FOR-YOU-token, and update with your desired color combination!
+```zsh
+...
+##
+# CUSTOMIZE-FOR-YOU
+#   Modify the below with your own colors!
+#   Suggest using variables, but feel free to use <var>="r;g;b"...you do you!
+"custom")
+  export MAN_THEME_BG=$my_color_name
+  export MAN_THEME_TXT=$my_hot_pink
+  export MAN_THEME_BG2=$rose_pine_highlight_med
+  export MAN_THEME_UNDERLINE=$my_other_color_name
+  export MAN_THEME_BOLD=$rose_pine_iris
+  export MAN_THEME_BLINK=$rose_pine_love
+  export MAN_THEME_REVERSE=$rose_pine_rose  
+...
+```
+
+### Try custom theme out
+Save, reload, and try it out! A common pattern is recommended to make edits in one terminal window or with one editor, and in another terminal window, reload and try out the changes!
+```zsh
+$ . ~/.zshrc
+$ colorize_man custom      #just in case we missed a step...
+$ term16m_man_color_test
+$ man ls
+```
+
+## Update default theme
+We have put good work into our custom theme, so let's update `custom-man.zsh` to use our custom theme by default. Doing so will also make your .zshrc process a tiny bit faster.   Using the editor of your choice...
+
+Change from...
+```zsh
+function colorize_man() {
+  local theme="rose-pine" #default
+  ...
+```
+To:
+```zsh
+function colorize_man() {
+  local theme="custom" #default
+  ...
+```
+Update your .zshrc...no need to specify custom!  
+```zsh
+...
+# source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+source ~/.config/zsh/custom-man.zsh
+...
+```
+
+Remember to reload your .zshrc:
+```zsh
+$ . ~/.zshrc
+$ term16m_man_color_test
+$ man ls
+```
+
+## Create new themes
+To apply new themes...this part is not so elegant and...may change in the future! But, for the adventurous...read on!
+
+First, decide on a theme name; remember, kebab-case looks nice!
+
+### Add your new theme to the list of recognized themes
+```zshrc
+...
+ case "${theme_input}" in
+      ...
+      "my-theme-name") theme=${theme_input}
+      ;;
+      ...
+...
+```
+
+### Add your theme 
+```zshrc
+...
+    "my-theme-name")
+      export MAN_THEME_BG=$color1
+      export MAN_THEME_TXT=$color2
+      export MAN_THEME_BG2=$color3
+      export MAN_THEME_UNDERLINE=$color4
+      export MAN_THEME_BOLD=$color5
+      export MAN_THEME_BLINK=$color6
+      export MAN_THEME_REVERSE=$color7
+    ;;
+...
+```
+
+Update `term16m_man_theme_color_test()` if you care.
+
+### Test out your theme
+Remember to reload your .zshrc:
+```zsh
+$ . ~/.zshrc
+$ color_man my-theme-name
+$ term16m_man_color_test
+$ man ls
+```
+
+# How it works
+`man` colors are applied via the `less` pager.  For whatever reason, the `less` pager has _undocumented_ environment variables that apply arbitrary text strings (that we have chosen to render true-color enabled ANSI terminal tokens) to different bits and pieces of the source man documents. 
+
+Note that  environment variable names are case sensitive!
+
+| Less environment variable | Function              |
+| ------------------------- | --------------------- |
+| LESS_TERMCAP_md           | Activate bold         |
+| LESS_TERMCAP_mb           | Activate blink        |
+| LESS_TERMCAP_me           | Inactivate bold/blink |
+| LESS_TERMCAP_so           | Activate stand-out    |
+| LESS_TERMCAP_se           | Inactivate stand-out  |
+| LESS_TERMCAP_us           | Activate underline    |
+| LESS_TERMCAP_ue           | Inactivate underline  |
+
+Note that setting a global `export LESS_TERMCAP_md` can negatively impact other colorization funcitons that feed text through `less` -  for ex, `chroma` / `pygments` etc can render askew.  
+
+Instead of setting these environment variables globally, we use the `zsh` builtin `env` - this allows us to pass in an array of settings that apply once, to a _specific_ command, and protect the global less environment from our `man` color sheningans.
+
+We bundle all of the above in a  `funciton man()`...this way, we have better control over how the actual `man` command executes...including the ability to set a different default background/foreground text value!
+
+# To-Dos
+* Theme check / application is inelegant
+* Confirm linux compatability
+* Confirm `bash` compatability 
