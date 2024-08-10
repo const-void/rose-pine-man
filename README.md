@@ -1,7 +1,7 @@
 # rose-pine-man
 rose-pine color theme for `man` page viewing.
 
-[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png|alt=rose-pine]]
+![rose-pine-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png)
 
 
 # Key features
