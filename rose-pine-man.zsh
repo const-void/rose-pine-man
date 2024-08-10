@@ -1,4 +1,8 @@
 
+# rose-pine-man.zh
+# (C) 2024 const void* 
+# https://github.com/const-void/rose-pine-man.git
+#
 # README.md has details!
 
 # Quick installation
