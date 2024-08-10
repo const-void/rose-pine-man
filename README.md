@@ -22,7 +22,8 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 $ . ~/.zshrc
 $ man zsh
 ```
-[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png|alt=rose-pine]]
+
+![rose-pine-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png)
 
 Want to try other `rose-pine` themes or a `custom` one? We got you.
 
@@ -33,7 +34,9 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-moon
 ```
 
-[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-moon-man.png|alt=rose-pine-moon]]
+
+![rose-pine-moon-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-moon-man.png)
+
 
 
 ## rose-pine-dawn
@@ -43,7 +46,7 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-dawn
 ```
 
-[[https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-dawn-man.png|alt=rose-pine-dawn]]
+![rose-pine-dawn-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-dawn-man.png)
 
 ## customized theme
 ```zsh
