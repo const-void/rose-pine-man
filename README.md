@@ -1,5 +1,7 @@
 # rose-pine-man
-rose-pine colro theme for `man` page viewing.
+rose-pine color theme for `man` page viewing.
+
+[[/doc/rose-pine-man.png]]
 
 # Key features
 * Rose-pine colors are available beyond man pages
@@ -17,10 +19,9 @@ $ vi ~/.zshrc
 source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 ...
 $ . ~/.zshrc
-$ man ls
+$ man zsh
 ```
-
-
+[[/doc/rose-pine-man.png]]
 
 Want to try other `rose-pine` themes or a `custom` one? We got you.
 
@@ -31,12 +32,16 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-moon
 ```
 
+[[/doc/rose-pine-moon.png]]
+
 ## rose-pine-dawn
 ```zsh
 # ~/.zshrc
 source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-dawn
 ```
+
+[[/doc/rose-pine-dawn.png]]
 
 ## customized theme
 ```zsh
@@ -46,6 +51,11 @@ colorize_man custom
 ```
 
 Please see the tips+tricks section for cutomization hints!
+
+## Credits
+* oh-my-zsh -- https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+* less termcap -- https://unix.stackexchange.com/questions/108699/documentation-on-less-termcap-variables/108840#108840
+* terminal truecolor -- https://github.com/termstandard/colors
 
 ### Try out different themes on the fly!
 To try a different theme on the fly:
