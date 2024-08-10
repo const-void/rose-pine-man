@@ -6,7 +6,7 @@ rose-pine color theme for `man` page viewing.
 
 # Key features
 * Rose-pine colors are available beyond man pages
-* Customizable + tweakable
+* Customizable + tweakable _truecolor_ man themes
 * Functions to help us learn about truecolor terminal colors
 
 # Quick Installation
@@ -26,6 +26,7 @@ $ man zsh
 ![rose-pine-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png)
 
 Want to try other `rose-pine` themes or a `custom` one? We got you.
+
 
 ## rose-pine-moon
 ```zsh
@@ -87,9 +88,9 @@ $ man zsh
 * OSX `Terminal.app` does not support true-color...at all.  Avoid for now.
 
 # Tips and tricks
-Some handy helper functions are included, prefixed with `term16m` to indicate they require truecolor suport.  
+Some handy helper functions are included, prefixed with `term16m` to indicate they require truecolor (16 million colors) suport.  
 
-To use, run functions as commands from an interactive terminal, and explore color theming! 
+To use, invoke functions as commands inside an interactive terminal, and explore color theming! 
 
 Color theming takes some trial and error.
 
@@ -170,9 +171,9 @@ MAN_THEME_TXT="255;128;237"
 While the above works and is quick, we lose the ability to try out themes, and in some cases...could be problematic.
 
 ### Themeable way
-To make it long term, let's copy `rose-pine-man.zsh` to somewhere else, so we can make changes to that secondary spot, without having our updates overwritten by updates to the `rose-pine-man` github repository.  
+Instead, let's copy `rose-pine-man.zsh` to somewhere else, so we can make changes to that secondary location, without having our updates overwritten by updates to the `rose-pine-man` github repository.  
 
-Customizing login shell scripts is a time honored tradition!  So let's roll up our sleeves and get to it.
+Never fear--customizing login shell scripts is a time honored tradition!  So let's roll up our sleeves and get to it, and make _our_ theme, truly _yours_.
 
 ## Make and use local copy
 ```zsh
@@ -190,12 +191,12 @@ If we ever need to revert back, comment the line containing `custom-man.zsh` and
 
 
 ## Applying custom colors
-Places intended for us to customize have been identified by a CUSTOMIZE-FOR-YOU token.  For custom colors, there are two steps:
+Locations intended for us to customize have been identified by a `CUSTOMIZE-FOR-YOU` token.  For custom colors, there are two steps:
 1. Add your custom color
 2. Apply your custom color to the custom theme
 
 ### Add custom color
-The first step is to add custom colors..look for the second CUSTOMIZE-FOR-YOU token, and add your own colors!
+The first step is to add custom colors..look for the second `CUSTOMIZE-FOR-YOU` token, and add your own colors!
 ```zsh
 $ vi ~/.config/zsh/custom-man.zsh
 ...
@@ -210,7 +211,7 @@ my_color_name_3="<r>;<g>;<b>"
 ```
 
 ### Apply custom color
-Now let's add our new custom colors to the custom theme.  Look for the first CUSTOMIZE-FOR-YOU-token, and update with your desired color combination!
+Now let's add our new custom colors to the custom theme.  Look for the first `CUSTOMIZE-FOR-YOU` token, and update with your desired color combination!
 ```zsh
 ...
 ##
@@ -229,7 +230,9 @@ Now let's add our new custom colors to the custom theme.  Look for the first CUS
 ```
 
 ### Try custom theme out
-Save, reload, and try it out! A common pattern is recommended to make edits in one terminal window or with one editor, and in another terminal window, reload and try out the changes!
+Save, reload via `. ~/.zshrc`, and try it out! 
+
+A common pattern is recommended to make edits in one terminal window or with one editor, and in another terminal window, reload and try out the changes!
 ```zsh
 $ . ~/.zshrc
 $ colorize_man custom      #just in case we missed a step...
@@ -238,7 +241,9 @@ $ man ls
 ```
 
 ## Update default theme
-We have put good work into our custom theme, so let's update `custom-man.zsh` to use our custom theme by default. Doing so will also make your .zshrc process a tiny bit faster.   Using the editor of your choice...
+We have put good work into our custom theme, so let's update `custom-man.zsh` to use our custom theme by default. Doing so will also make your `.zshrc` process a tiny bit faster.  
+
+Using the editor of your choice...
 
 Change from...
 ```zsh
@@ -270,10 +275,14 @@ $ man ls
 ## Create new themes
 To apply new themes...this part is not so elegant and...may change in the future! But, for the adventurous...read on!
 
-First, decide on a theme name; remember, kebab-case looks nice!
+First, decide on a theme name; remember, kebab-case looks nice!  From here:
+* Next, we will add our theme name such that `colorize_man` recognizes the parameter.
+* Next, add your theme _to_ `colorize_man`
+* Finally, add your theme to `term16m_man_theme_color_test`
+
 
 ### Add your new theme to the list of recognized themes
-```zshrc
+```zsh
 ...
  case "${theme_input}" in
       ...
@@ -284,7 +293,7 @@ First, decide on a theme name; remember, kebab-case looks nice!
 ```
 
 ### Add your theme 
-```zshrc
+```zsh
 ...
     "my-theme-name")
       export MAN_THEME_BG=$color1
@@ -298,7 +307,13 @@ First, decide on a theme name; remember, kebab-case looks nice!
 ...
 ```
 
-Update `term16m_man_theme_color_test()` if you care.
+### Add your theme `term16m_man_theme_color_test()`
+```zsh
+function term16m_man_theme_color_test() {
+  ...
+   term16m_man_theme_test my-theme-name
+  ...
+```
 
 ### Test out your theme
 Remember to reload your .zshrc:
