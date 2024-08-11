@@ -56,7 +56,7 @@ function colorize_man() {
     "rose-pine-dawn")
       export MAN_THEME_BG=$rose_pine_dawn_base
       export MAN_THEME_TXT=$rose_pine_dawn_text
-      export MAN_THEME_BG2=$rose_pine_dawn_highlight_med
+      export MAN_THEME_BG2=$rose_pine_dawn_surface
       export MAN_THEME_UNDERLINE=$rose_pine_dawn_gold
       export MAN_THEME_BOLD=$rose_pine_dawn_iris
       export MAN_THEME_BLINK=$rose_pine_dawn_love
