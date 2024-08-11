@@ -5,7 +5,7 @@ rose-pine color theme for `man` page viewing.
 
 
 # Key features
-* Rose-pine colors are available beyond man pages
+* Rose-pine colors are available for terminal use beyond man colors
 * Customizable + tweakable _truecolor_ man themes
 * Functions to help us learn about truecolor terminal colors
 
@@ -56,7 +56,7 @@ source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man custom
 ```
 
-Please see the tips+tricks section for cutomization hints!
+Please see the tips+tricks section for customization hints!
 
 ## Credits
 * oh-my-zsh -- https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/colored-man-pages/colored-man-pages.plugin.zsh
@@ -88,7 +88,7 @@ $ man zsh
 * OSX `Terminal.app` does not support true-color...at all.  Avoid for now.
 
 # Tips and tricks
-Some handy helper functions are included, prefixed with `term16m` to indicate they require truecolor (16 million colors) suport.  
+Some handy helper functions are included, prefixed with `term16m` to indicate they require truecolor (16 million colors) support.  
 
 To use, invoke functions as commands inside an interactive terminal, and explore color theming! 
 
@@ -159,7 +159,7 @@ $ man zsh
 Any customization / exploration we have done is temporary. 
 
 ### Lazy way
-One way to persist custom themese is to simply override settings in your .zshrc:
+One way to persist custom themes is to simply override settings in your `.zshrc`:
 ```zsh
 $ vi ~/.zshrc
 ...
@@ -245,19 +245,20 @@ We have put good work into our custom theme, so let's update `custom-man.zsh` to
 
 Using the editor of your choice...
 
-Change from...
+Change **from:**
 ```zsh
 function colorize_man() {
   local theme="rose-pine" #default
   ...
 ```
-To:
+**To:**
 ```zsh
 function colorize_man() {
   local theme="custom" #default
   ...
 ```
-Update your .zshrc...no need to specify custom!  
+
+Update your `.zshrc`...no need to specify custom!  
 ```zsh
 ...
 # source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
@@ -265,7 +266,7 @@ source ~/.config/zsh/custom-man.zsh
 ...
 ```
 
-Remember to reload your .zshrc:
+Remember to reload your `.zshrc`:
 ```zsh
 $ . ~/.zshrc
 $ term16m_man_color_test
@@ -316,7 +317,7 @@ function term16m_man_theme_color_test() {
 ```
 
 ### Test out your theme
-Remember to reload your .zshrc:
+Remember to reload your `.zshrc`:
 ```zsh
 $ . ~/.zshrc
 $ color_man my-theme-name
@@ -339,13 +340,14 @@ Note that  environment variable names are case sensitive!
 | LESS_TERMCAP_us           | Activate underline    |
 | LESS_TERMCAP_ue           | Inactivate underline  |
 
-Note that setting a global `export LESS_TERMCAP_md` can negatively impact other colorization funcitons that feed text through `less` -  for ex, `chroma` / `pygments` etc can render askew.  
+Note that setting a global `export LESS_TERMCAP_md` can negatively impact other colorization functions that feed text through `less` -  for ex, `chroma` / `pygments` etc can render askew.  
 
-Instead of setting these environment variables globally, we use the `zsh` builtin `env` - this allows us to pass in an array of settings that apply once, to a _specific_ command, and protect the global less environment from our `man` color sheningans.
+Instead of setting these environment variables globally, we use the `zsh` builtin `env` - this allows us to pass in an array of settings that apply once, to a _specific_ command, and protect the global less environment from our `man` color shenanigans.
 
-We bundle all of the above in a  `funciton man()`...this way, we have better control over how the actual `man` command executes...including the ability to set a different default background/foreground text value!
+We bundle all of the above in a  `function man()`...this way, we have better control over how the actual `man` command executes...including the ability to set a different default background/foreground text value!
 
 # To-Dos
-* Theme check / application is inelegant
-* Confirm linux compatability
-* Confirm `bash` compatability 
+* Document how to use beyond `man`
+* Theme check / application is inelegant - load from `~/.config/zsh/theme`
+* Confirm linux compatibility
+* Confirm `bash` compatibility 
