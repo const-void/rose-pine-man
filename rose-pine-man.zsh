@@ -148,24 +148,24 @@ term16m_reset="${term16m_bgn}0${term16m_end}"
 ## Helper functions #########################
 
 ## Given background r;g;b and foreground r;g;b, create truecolor ANSI terminal token
-# $ term16m_set_color 
-# $ term16m_set_color <bg r;g;b> <fg r;g;b>
-function term16m_set_color() {
+# $ term16m_set_less_color 
+# $ term16m_set_less_color <bg r;g;b> <fg r;g;b>
+function term16m_set_less_color() {
   echo "${term16m_bgn}${term16m_bg}$1;${term16m_fg}$2${term16m_end}"
 }
 
 # man <man page>
 function man() {
-  local normal=$(term16m_set_color $MAN_THEME_BG $MAN_THEME_TXT)
+  local normal=$(term16m_set_less_color $MAN_THEME_BG $MAN_THEME_TXT)
   local -a environment
-  environment+=("LESS_TERMCAP_md=$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_BOLD)")       #begin bold
-  environment+=("LESS_TERMCAP_mb=$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_BLINK)")      #begin blink
+  environment+=("LESS_TERMCAP_md=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_BOLD)")       #begin bold
+  environment+=("LESS_TERMCAP_mb=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_BLINK)")      #begin blink
   environment+=("LESS_TERMCAP_me=$normal")                                   #end bold/blink
 
-  environment+=("LESS_TERMCAP_so=$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_REVERSE)")    #begin standout/reverse
+  environment+=("LESS_TERMCAP_so=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_REVERSE)")    #begin standout/reverse
   environment+=("LESS_TERMCAP_se=$normal")                                   #end standout/reverse
 
-  environment+=("LESS_TERMCAP_us=$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_UNDERLINE)")  #begin underline
+  environment+=("LESS_TERMCAP_us=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_UNDERLINE)")  #begin underline
   environment+=("LESS_TERMCAP_ue=$normal")                                   #end underline
 
   echo -en "${normal}"
@@ -177,11 +177,11 @@ function man() {
 ## Render current man theme colors
 # $ term16m_man_color_test
 function term16m_man_color_test() {
-  local normal=$(term16m_set_color $MAN_THEME_BG $MAN_THEME_TXT)
-  echo "$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_BOLD)BOLD_TEST${term16m_reset}"
-  echo "$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_UNDERLINE)UNDERLINE${term16m_reset}"
-  echo "$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_BLINK)BLINK${term16m_reset}"
-  echo "$(term16m_set_color $MAN_THEME_BG2 $MAN_THEME_REVERSE)REVERSE${term16m_reset}"
+  local normal=$(term16m_set_less_color $MAN_THEME_BG $MAN_THEME_TXT)
+  echo "$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_BOLD)BOLD_TEST${term16m_reset}"
+  echo "$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_UNDERLINE)UNDERLINE${term16m_reset}"
+  echo "$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_BLINK)BLINK${term16m_reset}"
+  echo "$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_REVERSE)REVERSE${term16m_reset}"
   echo "${normal}NORMAL TEXT${term16m_reset}"
 }
 
