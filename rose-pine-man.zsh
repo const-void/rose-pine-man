@@ -9,11 +9,13 @@
 #
 # Add to ~/.zshrc:
 #   source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh #or wherever we cloned this repo
-#   # colorize_man "rose-pine"   # "rose-pine-moon", "rose-pine-dawn", "custom"
+#   # colorize_man "rose-pine"                # "rose-pine-moon", "rose-pine-dawn", "custom"
+#   # colorize_man "rose-pine" "transparent"  # second parameter is optional - set to transparent 
+#                                             # or true to activate transparency
 
 # To customize, search on CUSTOMIZE-FOR-YOU.  Minimal changes are needed. Have fun!
 
-# $ colorize_man <theme>
+# $ colorize_man <theme> [true]
 function colorize_man() {
   local theme="rose-pine" #default
 
@@ -31,7 +33,21 @@ function colorize_man() {
       ;;
     esac
     # otherwise, $theme is unchanged + remains default
+
+    #default is a solid background - set transparency to OFF
+    export MAN_TRANSPARENCY=0
+    if [[ "${#}" -ge 2 ]]; then
+      local transparency_input=$2
+      typeset -l transparency_input
+
+      if [[ "${transparency_input}" == "transparent" || "${transparency_input}" == "true" ]]; then
+        #activate transparency logic
+        export MAN_TRANSPARENCY=1
+      fi
+    fi
   fi
+
+
 
   # apply colors to exported theme env vars
   case "${theme}" in
@@ -148,10 +164,17 @@ term16m_reset="${term16m_bgn}0${term16m_end}"
 ## Helper functions #########################
 
 ## Given background r;g;b and foreground r;g;b, create truecolor ANSI terminal token
+## 
+## If global MAN_TRANSPARENCY, do not set background colors"
+## 
 # $ term16m_set_less_color 
 # $ term16m_set_less_color <bg r;g;b> <fg r;g;b>
 function term16m_set_less_color() {
-  echo "${term16m_bgn}${term16m_bg}$1;${term16m_fg}$2${term16m_end}"
+  if [[ "${MAN_TRANSPARENCY}" -eq 0 ]]; then 
+    echo "${term16m_bgn}${term16m_bg}$1;${term16m_fg}$2${term16m_end}"
+  else
+    echo "${term16m_bgn};${term16m_fg}$2${term16m_end}"
+  fi
 }
 
 # man <man page>
@@ -160,13 +183,13 @@ function man() {
   local -a environment
   environment+=("LESS_TERMCAP_md=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_BOLD)")       #begin bold
   environment+=("LESS_TERMCAP_mb=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_BLINK)")      #begin blink
-  environment+=("LESS_TERMCAP_me=$normal")                                   #end bold/blink
+  environment+=("LESS_TERMCAP_me=$normal")                                                        #end bold/blink
 
   environment+=("LESS_TERMCAP_so=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_REVERSE)")    #begin standout/reverse
-  environment+=("LESS_TERMCAP_se=$normal")                                   #end standout/reverse
+  environment+=("LESS_TERMCAP_se=$normal")                                                        #end standout/reverse
 
   environment+=("LESS_TERMCAP_us=$(term16m_set_less_color $MAN_THEME_BG2 $MAN_THEME_UNDERLINE)")  #begin underline
-  environment+=("LESS_TERMCAP_ue=$normal")                                   #end underline
+  environment+=("LESS_TERMCAP_ue=$normal")                                                        #end underline
 
   echo -en "${normal}"
   command env $environment man "$@"
