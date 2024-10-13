@@ -25,7 +25,7 @@ $ man zsh
 
 ![rose-pine-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-man.png)
 
-Want to try other `rose-pine` themes or a `custom` one? We got you.
+Want to try other `rose-pine` themes or a `custom` one? We got you.  Need a transparent background? You are good.
 
 
 ## rose-pine-moon
@@ -33,6 +33,7 @@ Want to try other `rose-pine` themes or a `custom` one? We got you.
 # ~/.zshrc
 source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-moon
+# colorize_man rose-pine-moon transparent 
 ```
 
 
@@ -45,6 +46,7 @@ colorize_man rose-pine-moon
 # ~/.zshrc
 source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man rose-pine-dawn
+# colorize_man rose-pine-dawn transparent
 ```
 
 ![rose-pine-dawn-man](https://github.com/const-void/rose-pine-man/blob/main/doc/rose-pine-dawn-man.png)
@@ -54,9 +56,19 @@ colorize_man rose-pine-dawn
 # ~/.zshrc
 source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
 colorize_man custom
+# colorize_man custom transparent
 ```
 
 Please see the tips+tricks section for customization hints!
+
+## transparency?
+By default, we set the background to match the rose-pine theme.  However, if you are running a terminal with transparency and want to keep the transparency setting, simply pass in `transparent` as an optional second parameter. This activates logic that ignores setting background colors - only your terminal emulator can do actual transparency (alacritty et)
+
+```zsh
+# ~/.zshrc
+source ~/.config/zsh/rose-pine-man/rose-pine-man.zsh
+colorize_man rose-pine-moon transparent
+```
 
 ## Credits
 * oh-my-zsh -- https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/colored-man-pages/colored-man-pages.plugin.zsh
@@ -73,6 +85,14 @@ $ man zsh
 $ colorize_man rose-pine-dawn
 $ man zsh
 $ colorize_man custom
+$ man zsh
+
+## Settings that respect transparency
+$ colorize_man rose-pine transparent
+$ man zsh
+$ colorize_man rose-pine-moon transparent
+$ man zsh
+$ colorize_man rose-pine-dawn transparent
 $ man zsh
 ```
 
